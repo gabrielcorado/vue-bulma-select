@@ -1,8 +1,14 @@
 <template>
-  <div :class="containerClasses" @blur="close">
-    <div :class="placeholderClasses" @click.self="toggleOpened">
-      {{ selected === undefined ? placeholder : textSelected }}
-    </div>
+  <div :class="containerClasses" >
+    <input
+      ref="search"
+      :class="placeholderClasses"
+      :readonly="!search"
+      :value="textSelected"
+      :placeholder="placeholder"
+      @blur="close"
+      @click.self="toggleOpened">
+
     <transition name="slide-fade">
       <div v-if="opened" :class="optionsClasses">
         <button
@@ -39,6 +45,11 @@ export default {
     value: {
       type: null,
       default: null
+    },
+    // Has search?
+    search: {
+      type: Boolean,
+      default: false
     }
   },
   // Component inner state
@@ -67,6 +78,10 @@ export default {
     selectedItem () { return this.options[this.selected] },
     // Text for the selected option
     textSelected () {
+      //
+      if (this.selected === undefined || this.opened) { return '' }
+
+      //
       return this.label !== undefined ? this.selectedItem[this.label] : this.selectedItem
     }
   },
@@ -83,7 +98,7 @@ export default {
 
       // Definitions
       this.opened = true
-      this.$el.focus()
+      this.$refs.search.focus()
     },
     // Close the select
     close () {
@@ -92,7 +107,7 @@ export default {
 
       // Definitions
       this.opened = false
-      this.$el.blur()
+      this.$refs.search.blur()
     },
     // Set the selected using v-model value
     selectVModel () {
@@ -150,7 +165,7 @@ export default {
     @extend select
     box-sizing: border-box
     text-align: left
-    padding-top: 6px
+    width: 100%
     &.is-hovered
       border-radius: $input-radius $input-radius 0 0
   &__options
