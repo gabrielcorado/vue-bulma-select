@@ -6,6 +6,7 @@
         label="name"
         placeholder="Select your president"
         v-model="selection"
+        :search="true"
         :options="options">
       </bulma-select>
     </div>

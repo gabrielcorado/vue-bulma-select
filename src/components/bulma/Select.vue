@@ -2,11 +2,12 @@
   <div :class="containerClasses" >
     <input
       ref="search"
+      v-model="searchField"
       :class="placeholderClasses"
       :readonly="!search"
-      :value="textSelected"
       :placeholder="placeholder"
       @blur="close"
+      @input="inputSearch"
       @click.self="toggleOpened">
 
     <transition name="slide-fade">
@@ -57,6 +58,7 @@ export default {
     //
     return {
       opened: false,
+      searchField: '',
       selected: undefined
     }
   },
@@ -79,7 +81,7 @@ export default {
     // Text for the selected option
     textSelected () {
       //
-      if (this.selected === undefined || this.opened) { return '' }
+      if (this.selected === undefined) { return '' }
 
       //
       return this.label !== undefined ? this.selectedItem[this.label] : this.selectedItem
@@ -98,6 +100,7 @@ export default {
 
       // Definitions
       this.opened = true
+      this.searchField = ''
       this.$refs.search.focus()
     },
     // Close the select
@@ -107,6 +110,7 @@ export default {
 
       // Definitions
       this.opened = false
+      this.searchField = this.textSelected
       this.$refs.search.blur()
     },
     // Set the selected using v-model value
@@ -115,18 +119,20 @@ export default {
       this.selected = this.options.indexOf(this.value)
     },
     // Select a value based on the index
-    selectOption (i) {
-      // Select the item
-      this.selected = i
-
-      // Close the select
-      this.close()
+    selectOption (i) { this.selected = i },
+    // Search items
+    inputSearch () {
+      //
+      this.$emit('', this.searchField)
     }
   },
   // Watchers
   watch: {
     // Change the selected item
     selected () {
+      //
+      this.searchField = this.textSelected
+
       // Emit!
       this.$emit('input', this.options[this.selected])
     },
