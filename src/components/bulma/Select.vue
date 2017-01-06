@@ -1,8 +1,7 @@
 <template>
   <div :class="containerClasses" @blur="close">
     <div :class="placeholderClasses" @click.self="toggleOpened">
-      <span v-if="selected === undefined">{{ placeholder }}</span>
-      <span v-else>{{ textSelected }}</span>
+      {{ selected === undefined ? placeholder : textSelected }}
     </div>
     <transition name="slide-fade">
       <div v-if="opened" :class="optionsClasses">
@@ -10,8 +9,7 @@
           v-for="(option, i) in options"
           @click="selectOption(i)"
           :class="['button is-white', selected === i ? 'is-info' : '', 'bulma-select__option']">
-          <template v-if="label !== undefined">{{ option[label] }}</template>
-          <template v-else>{{ option }}</template>
+          {{ label !== undefined ? option[label] : option }}
         </button>
       </div>
     </transition>
