@@ -55,7 +55,7 @@ export default {
   computed: {
     // Container computed classes
     containerClasses () {
-      return ['select bulma-select__container', {'bulma-select__container--active': this.opened}]
+      return ['bulma-select__container', {'bulma-select__container--active': this.opened}]
     },
     // Placeholder computed classes
     placeholderClasses () {
@@ -139,6 +139,7 @@ export default {
 //
 .bulma-select
   &__container
+    @extend .select
     position: relative
     width: 100%
     &:after
