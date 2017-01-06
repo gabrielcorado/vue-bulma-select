@@ -11,6 +11,10 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
+  "files": [
+    "src/index.js",
+    "src/components"
+  ],
   "dependencies": {
     "bulma": "^0.3.0",
     "node-sass": "^4.1.1",
