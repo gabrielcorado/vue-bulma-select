@@ -70,7 +70,7 @@ export default {
     },
     // Placeholder computed classes
     placeholderClasses () {
-      return ['bulma-select__placeholder button is-white', {'is-hovered': this.opened}]
+      return ['bulma-select__placeholder input', {'is-hovered': this.opened}]
     },
     // Options computed classes
     optionsClasses () {
