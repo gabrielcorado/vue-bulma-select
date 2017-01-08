@@ -11,7 +11,7 @@
       @click.self="toggleOpened">
 
     <transition name="vuebulmaselect-slide-fade">
-      <div v-if="opened" :class="optionsClasses">
+      <div v-show="opened" :class="optionsClasses">
         <button
           v-for="(option, i) in options"
           @click="selectOption(i)"
