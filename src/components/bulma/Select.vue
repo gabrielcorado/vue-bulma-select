@@ -123,7 +123,7 @@ export default {
     // Search items
     inputSearch () {
       //
-      this.$emit('', this.searchField)
+      this.$emit('type', this.searchField)
     }
   },
   // Watchers
