@@ -11,13 +11,20 @@
       @click.self="toggleOpened">
 
     <transition name="vuebulmaselect-slide-fade">
-      <div v-show="opened" :class="optionsClasses">
-        <button
-          v-for="(option, i) in options"
-          @click="selectOption(i)"
-          :class="['button is-white', selected === i ? 'is-info' : '', 'bulma-select__option']">
-          {{ label !== undefined ? option[label] : option }}
-        </button>
+      <div v-show="opened" :style="optionsStyles" :class="optionsClasses">
+        <template v-if="options.length === 0">
+          <button disabled class="button is-white bulma-select__option">
+            <slot name="no-results">No options found.</slot>
+          </button>
+        </template>
+        <template v-else>
+          <button
+            v-for="(option, i) in options"
+            @click="selectOption(i)"
+            :class="['button is-white', selected === i ? 'is-info' : '', 'bulma-select__option']">
+            {{ label !== undefined ? option[label] : option }}
+          </button>
+        </template>
       </div>
     </transition>
   </div>
@@ -51,6 +58,11 @@ export default {
     search: {
       type: Boolean,
       default: false
+    },
+    // Max items displayed
+    maxItems: {
+      type: Number,
+      default: 5
     }
   },
   // Component inner state
@@ -59,6 +71,7 @@ export default {
     return {
       opened: false,
       searchField: '',
+      saveSearchField: '',
       selected: undefined
     }
   },
@@ -75,6 +88,19 @@ export default {
     // Options computed classes
     optionsClasses () {
       return [{'is-hovered': this.opened}, 'bulma-select__options']
+    },
+    // Options styles
+    optionsStyles () {
+      //
+      let styles = {}
+
+      //
+      if (this.options.length > this.maxItems) {
+        styles.height = 35 * this.maxItems + 'px'
+      }
+
+      // Return the styles
+      return styles
     },
     // Selected item
     selectedItem () { return this.options[this.selected] },
@@ -100,7 +126,7 @@ export default {
 
       // Definitions
       this.opened = true
-      this.searchField = ''
+      this.searchField = this.saveSearchField
       this.$refs.search.focus()
     },
     // Close the select
@@ -110,6 +136,7 @@ export default {
 
       // Definitions
       this.opened = false
+      this.saveSearchField = this.searchField
       this.searchField = this.textSelected
       this.$refs.search.blur()
     },
@@ -132,6 +159,7 @@ export default {
     selected () {
       //
       this.searchField = this.textSelected
+      this.saveSearchField = ''
 
       // Emit!
       this.$emit('input', this.options[this.selected])
@@ -177,6 +205,7 @@ export default {
   &__options
     +input
     display: block
+    overflow: auto
     padding: 0
     z-index: 5
     width: 100%
