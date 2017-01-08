@@ -142,7 +142,7 @@ export default {
     },
     // Set the selected using v-model value
     selectVModel () {
-      if (this.value === undefined) { return }
+      if (this.options.indexOf(this.value) === -1) { return }
       this.selected = this.options.indexOf(this.value)
     },
     // Select a value based on the index
@@ -172,7 +172,7 @@ export default {
   // When the component is created
   created () {
     // do it
-    // this.selectVModel()
+    this.selectVModel()
   }
 }
 </script>
