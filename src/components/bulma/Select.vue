@@ -10,7 +10,7 @@
       @input="inputSearch"
       @click.self="toggleOpened">
 
-    <transition name="slide-fade">
+    <transition name="vuebulmaselect-slide-fade">
       <div v-if="opened" :class="optionsClasses">
         <button
           v-for="(option, i) in options"
@@ -192,7 +192,7 @@ export default {
     display: block
 
 // Transition definition
-.slide-fade
+.vuebulmaselect-slide-fade
   &-enter-active
     transition: all 0.2s ease
   &-leave-active
