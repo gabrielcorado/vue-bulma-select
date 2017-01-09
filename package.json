@@ -17,11 +17,11 @@
   ],
   "dependencies": {
     "bulma": "^0.3.0",
-    "node-sass": "^4.1.1",
-    "sass-loader": "^4.1.1",
     "vue": "^2.1.0"
   },
   "devDependencies": {
+    "node-sass": "^4.1.1",
+    "sass-loader": "^4.1.1",
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.0.0",
