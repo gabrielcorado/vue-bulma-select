@@ -127,6 +127,7 @@ export default {
       // Definitions
       this.opened = true
       this.searchField = this.saveSearchField
+      this.$emit('type', this.searchField)
       this.$refs.search.focus()
     },
     // Close the select
