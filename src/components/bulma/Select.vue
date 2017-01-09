@@ -107,7 +107,7 @@ export default {
     // Text for the selected option
     textSelected () {
       //
-      if (this.selected === undefined) { return '' }
+      if (this.options[this.selected] === undefined) { return '' }
 
       //
       return this.label !== undefined ? this.selectedItem[this.label] : this.selectedItem
@@ -125,9 +125,9 @@ export default {
       if (this.opened) { return }
 
       // Definitions
-      this.opened = true
       this.searchField = this.saveSearchField
-      this.$emit('type', this.searchField)
+      this.inputSearch()
+      this.opened = true
       this.$refs.search.focus()
     },
     // Close the select
@@ -147,7 +147,15 @@ export default {
       this.selected = this.options.indexOf(this.value)
     },
     // Select a value based on the index
-    selectOption (i) { this.selected = i },
+    selectOption (i) {
+      //
+      this.selected = i
+      this.searchField = this.textSelected
+      this.saveSearchField = ''
+
+      // Emit!
+      this.$emit('input', this.options[this.selected])
+    },
     // Search items
     inputSearch () {
       //
@@ -156,18 +164,15 @@ export default {
   },
   // Watchers
   watch: {
-    // Change the selected item
-    selected () {
-      //
-      this.searchField = this.textSelected
-      this.saveSearchField = ''
-
-      // Emit!
-      this.$emit('input', this.options[this.selected])
-    },
     // Value changed
     value () {
       this.selectVModel()
+    },
+    // Options also change
+    options (_, old) {
+      //
+      let i = this.options.indexOf(old[this.selected])
+      if (i > -1) { this.selected = i }
     }
   },
   // When the component is created
