@@ -1,8 +1,15 @@
-# vue-bulma-select
+# Vue Bulma Select
+Select components using Bulma as CSS framework
 
-> Select components using Bulma as CSS framework
+## Docs/Examples
+[Could be found here](https://gabrielcorado.github.io/vue-bulma-select/)
 
-## Build Setup
+## TODO
+* [ ] Unit testing
+* [ ] Multi-select (tags)
+
+## Develpoment
+**Any command could be runned in the docker-compose env**
 
 ``` bash
 # install dependencies
@@ -13,12 +20,4 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
