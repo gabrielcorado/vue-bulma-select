@@ -51,7 +51,8 @@ var webpackConfig = merge(baseWebpackConfig, {
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
+        minifyURLs: (t) => `/vue-bulma-select${t}`
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
