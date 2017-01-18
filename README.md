@@ -5,6 +5,7 @@ Select components using Bulma as CSS framework
 [Could be found here](https://gabrielcorado.github.io/vue-bulma-select/)
 
 ## TODO
+* [ ] Push to NPM
 * [ ] Unit testing
 * [ ] Multi-select (tags)
 
