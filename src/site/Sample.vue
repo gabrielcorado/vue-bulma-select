@@ -18,7 +18,7 @@
       <transition mode="out-in" name="slide-fade">
         <slot v-if="active === 0" name="result"></slot>
         <div v-else-if="active === 1">
-          <pre><code><slot name="source"></slot></pre></code>
+          <pre><code><slot name="source"></slot></code></pre>
         </div>
       </transition>
     </div>
